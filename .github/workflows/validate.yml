@@ -1,0 +1,42 @@
+name: HACE Spec Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g ajv-cli ajv-formats
+      - run: ajv compile -s schema/hace-v1.0.json
+      - run: ajv compile -s schema/candidate-v1.0.json
+
+  validate-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m py_compile verify/verify.py
+      - run: echo "Python verifier syntax clean"
+
+  validate-typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g typescript
+      - run: >
+          tsc --strict --noEmit --target ES2022
+          --moduleResolution node verify/verify.ts
+      - run: echo "TypeScript verifier compiles clean"

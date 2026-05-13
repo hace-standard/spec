@@ -1,3 +1,5 @@
+![Validation](https://github.com/hace-standard/spec/actions/workflows/validate.yml/badge.svg)
+
 # HACE
 ## Human Acknowledgment of Chain Execution
 
