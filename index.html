@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HACE -- Human Acknowledgment of Chain Execution</title>
-<meta name="description" content="The open standard for human acknowledgment of governed AI execution.">
+<title>HACE v1.0 -- Human Acknowledgment of Chain Execution</title>
+<meta name="description" content="HACE v1.0. Open standard for human acknowledgment of governed AI execution. Published 13 May 2026.">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
 
@@ -16,430 +16,518 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: left;
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: #0d0d0c;
+  text-decoration: underline;
+}
 
 .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
 
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+/* STATUS BLOCKS */
+.status-stable,
+.status-enforced {
+  display: inline-block;
+  background: #f59e0b;
+  color: #ffffff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  padding: 2px 8px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.status-defined {
+  display: inline-block;
+  background: #f5f5f4;
+  color: #78716c;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  padding: 2px 8px;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
 /* HEADER */
 .site-header {
-  position: sticky;
-  top: 0;
-  background: #ffffff;
   border-bottom: 1px solid #e7e5e4;
-  padding: 16px 24px;
+  padding: 16px 0;
+}
+.site-header .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 10;
 }
-.brand {
+.site-header .mark {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-  color: #f59e0b;
+  font-size: 12px;
+  color: #0d0d0c;
   letter-spacing: 0.2em;
-  font-weight: 600;
 }
-.header-right { display: flex; align-items: center; }
-.version-tag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: #78716c;
-  margin-right: 24px;
-}
-.github-link {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: #0d0d0c;
-}
-.github-link:hover { text-decoration: underline; }
-
-/* HERO */
-.hero {
-  padding-top: 80px;
-  padding-bottom: 80px;
-  text-align: center;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 52px;
-  font-weight: 700;
-  color: #0d0d0c;
-  line-height: 1.2;
-}
-.hero-rule {
-  height: 2px;
-  width: 64px;
-  background: #f59e0b;
-  margin: 28px auto;
-}
-.hero-subtitle {
-  font-size: 18px;
-  color: #78716c;
-  max-width: 560px;
-  margin: 0 auto 40px;
-  line-height: 1.5;
-}
-.hero-buttons {
+.site-header .meta {
   display: flex;
-  justify-content: center;
+  align-items: center;
   gap: 16px;
 }
-.btn {
+.site-header .meta .v,
+.site-header .meta .d {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #78716c;
+}
+
+/* MASTHEAD */
+.masthead {
+  padding-top: 48px;
+  padding-bottom: 0;
+}
+.masthead .eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: #78716c;
+  letter-spacing: 0.15em;
+}
+.masthead h1 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  color: #0d0d0c;
+  margin-top: 8px;
+  margin-bottom: 28px;
+  line-height: 1.2;
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid #e7e5e4;
+  width: 100%;
+}
+
+.meta-table {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 24px 0;
+  margin: 0;
+}
+.meta-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+}
+.meta-table td {
+  padding: 6px 0;
+  vertical-align: top;
+}
+.meta-table td.label {
+  width: 180px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: #78716c;
+}
+.meta-table td.value {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 13px;
-  padding: 12px 28px;
-  cursor: pointer;
-  display: inline-block;
-  border: none;
-}
-.btn-primary {
-  background: #f59e0b;
-  color: #ffffff;
-}
-.btn-secondary {
-  background: #ffffff;
   color: #0d0d0c;
-  border: 1px solid #0d0d0c;
 }
+.meta-table td.value a { color: #0d0d0c; text-decoration: underline; }
 
 /* SECTIONS */
 .section {
-  padding-top: 64px;
-  padding-bottom: 64px;
-  border-top: 1px solid #e7e5e4;
+  padding-top: 40px;
+  padding-bottom: 0;
 }
-.section-label {
-  display: block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: #f59e0b;
-  letter-spacing: 0.15em;
-  margin-bottom: 12px;
-}
-.section-heading {
-  font-size: 26px;
+.section + .section { padding-top: 32px; }
+.section h2 {
+  font-size: 20px;
   font-weight: 600;
   color: #0d0d0c;
-  margin-bottom: 0;
+  margin-bottom: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
-.section-divider {
-  border: none;
-  border-top: 1px solid #e7e5e4;
-  margin: 20px 0 32px;
-}
-.section-body {
+.section p {
   font-size: 16px;
   color: #0d0d0c;
   line-height: 1.75;
   max-width: 720px;
 }
+.section p + p { margin-top: 10px; }
 
-/* STACK TABLE */
-.stack-table {
+.section-rule {
+  margin-top: 40px;
+}
+
+.block-section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.block-section h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0d0d0c;
+  margin-bottom: 16px;
+}
+.block-section .intro {
+  font-size: 16px;
+  color: #0d0d0c;
+  line-height: 1.75;
+  max-width: 720px;
+  margin-bottom: 16px;
+}
+
+/* TOC */
+.toc {
+  list-style-position: inside;
+  padding-left: 0;
+  margin: 0;
+}
+.toc li {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: #0d0d0c;
+  line-height: 2;
+  list-style: decimal inside;
+}
+.toc li a { color: #0d0d0c; text-decoration: underline; }
+
+/* DATA TABLES */
+.data-table {
   width: 100%;
   border-collapse: collapse;
 }
-.stack-table tr {
+.data-table tr {
   border-bottom: 1px solid #e7e5e4;
 }
-.stack-table tr:first-child {
+.data-table tr:first-child {
   border-top: 1px solid #e7e5e4;
 }
-.stack-table td {
-  padding: 16px 0;
+.data-table td {
+  padding: 14px 0;
   vertical-align: top;
 }
-.stack-table td.col-name {
-  width: 220px;
+.data-table td.col-name {
+  width: 200px;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 13px;
   color: #0d0d0c;
 }
-.stack-table td.col-desc {
+.data-table td.col-desc {
   font-size: 15px;
   color: #78716c;
   line-height: 1.6;
 }
-.stack-table tr.highlight td.col-name {
-  border-left: 3px solid #f59e0b;
-  padding-left: 12px;
-}
+.data-table.algos td.col-desc { font-size: 14px; }
 
-/* CONFORMANCE GRID */
-.conformance-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: #e7e5e4;
-}
-.conformance-card {
-  background: #ffffff;
-  padding: 28px;
-}
-.conformance-card.featured {
-  border-left: 3px solid #f59e0b;
-}
-.profile-name {
+/* DEFINITION LIST */
+dl.profiles { margin: 0; padding: 0; }
+dl.profiles dt {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
+  font-size: 13px;
   color: #0d0d0c;
+  margin-top: 20px;
 }
-.profile-name.amber { color: #f59e0b; }
-.profile-uri {
-  display: block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: #78716c;
-  margin: 6px 0 12px;
-}
-.chip {
-  display: inline-block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  padding: 3px 10px;
-  margin-bottom: 16px;
-}
-.chip.enforced {
-  background: #f59e0b;
-  color: #ffffff;
-}
-.chip.defined {
-  background: #f5f5f4;
-  color: #78716c;
-}
-.profile-desc {
-  font-size: 14px;
+dl.profiles dt:first-of-type { margin-top: 16px; }
+dl.profiles dd {
+  font-size: 15px;
   color: #78716c;
   line-height: 1.6;
+  margin-left: 0;
+  margin-top: 6px;
+  max-width: 720px;
 }
-
-/* COMPANION CARDS */
-.companion-row {
-  display: flex;
-  gap: 24px;
-}
-.companion-card {
-  flex: 1;
-  border: 1px solid #e7e5e4;
-  padding: 28px;
-}
-.companion-tag {
+dl.profiles dd .uri {
+  display: block;
   font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: #78716c;
+  margin-top: 4px;
+}
+dl.profiles dd .uri a { color: #78716c; text-decoration: underline; }
+
+/* REFERENCES */
+ol.refs {
+  padding-left: 20px;
+  margin: 0;
+}
+ol.refs li {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: #0d0d0c;
+  line-height: 2;
+  margin-bottom: 12px;
+}
+ol.refs li a { color: #0d0d0c; text-decoration: underline; }
+
+/* ERRATA */
+.errata-lines p {
   font-size: 16px;
-  color: #f59e0b;
-}
-.companion-title {
-  font-size: 18px;
   color: #0d0d0c;
-  font-weight: 700;
-  margin: 8px 0;
+  line-height: 1.75;
+  max-width: 720px;
 }
-.companion-desc {
-  font-size: 14px;
-  color: #78716c;
-  line-height: 1.6;
-}
-.companion-link {
-  display: block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  color: #0d0d0c;
-  margin-top: 16px;
-}
-.companion-link:hover { text-decoration: underline; }
+.errata-lines p + p { margin-top: 8px; }
 
-/* FOOTER */
-.site-footer {
-  border-top: 2px solid #f59e0b;
-  padding: 40px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
+/* COLOPHON */
+.colophon {
+  border-top: 1px solid #e7e5e4;
+  padding: 32px 0;
+  margin-top: 0;
 }
-.footer-left { display: flex; align-items: center; }
-.footer-brand {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-  color: #f59e0b;
-  letter-spacing: 0.2em;
-  font-weight: 600;
-}
-.footer-tagline {
-  font-size: 13px;
-  color: #78716c;
-  margin-left: 16px;
-}
-.footer-center {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: #78716c;
-}
-.footer-right {
+.colophon p {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 12px;
-  color: #f59e0b;
+  color: #78716c;
 }
 
 /* MOBILE */
 @media (max-width: 640px) {
-  .hero h1 { font-size: 36px; }
-  .hero-buttons { flex-direction: column; }
-  .hero-buttons .btn { width: 100%; }
-  .conformance-grid { grid-template-columns: 1fr; }
-  .companion-row { flex-direction: column; }
-  .site-footer { flex-direction: column; text-align: center; }
-  .footer-left { flex-direction: column; gap: 8px; }
-  .footer-tagline { margin-left: 0; }
-  .stack-table td.col-name { width: 140px; }
+  .site-header .meta .d { display: none; }
+  .masthead h1 { font-size: 26px; }
+
+  .meta-table table,
+  .meta-table tbody,
+  .meta-table tr,
+  .meta-table td {
+    display: block;
+    width: 100%;
+  }
+  .meta-table td.label {
+    width: 100%;
+    padding-bottom: 0;
+    margin-top: 8px;
+  }
+  .meta-table td.value {
+    width: 100%;
+    padding-top: 2px;
+    padding-bottom: 8px;
+  }
+
+  .data-table,
+  .data-table tbody,
+  .data-table tr,
+  .data-table td {
+    display: block;
+    width: 100%;
+  }
+  .data-table tr {
+    padding: 12px 0;
+  }
+  .data-table td.col-name {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 4px;
+  }
+  .data-table td.col-desc {
+    width: 100%;
+    padding: 0;
+  }
+
+  .colophon p { text-align: center; }
 }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <span class="brand">HACE</span>
-  <div class="header-right">
-    <span class="version-tag">v1.0</span>
-    <a class="github-link" href="https://github.com/hace-standard/spec" target="_blank" rel="noopener noreferrer">GitHub</a>
+  <div class="container">
+    <div class="row">
+      <span class="mark">HACE</span>
+      <div class="meta">
+        <span class="status-stable">STABLE</span>
+        <span class="v">v1.0</span>
+        <span class="d">13 May 2026</span>
+      </div>
+    </div>
   </div>
 </header>
 
-<div class="container">
+<main class="container">
 
-  <section class="hero">
-    <h1>Human Acknowledgment<br>of Chain Execution</h1>
-    <div class="hero-rule"></div>
-    <p class="hero-subtitle">The open standard for human acknowledgment of governed AI execution.</p>
-    <div class="hero-buttons">
-      <a class="btn btn-primary" href="https://github.com/hace-standard/spec/blob/main/SPEC.md" target="_blank" rel="noopener noreferrer">Read the Spec</a>
-      <a class="btn btn-secondary" href="https://github.com/hace-standard/spec" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+  <section class="masthead">
+    <div class="eyebrow">HACE</div>
+    <h1>Human Acknowledgment of Chain Execution</h1>
+    <hr class="rule">
+    <div class="meta-table">
+      <table>
+        <tbody>
+          <tr>
+            <td class="label">This version:</td>
+            <td class="value"><a href="https://hace-standard.org/v1.0/" target="_blank" rel="noopener noreferrer">hace-standard.org/v1.0/</a></td>
+          </tr>
+          <tr>
+            <td class="label">Latest published:</td>
+            <td class="value"><a href="https://hace-standard.org/" target="_blank" rel="noopener noreferrer">hace-standard.org/</a></td>
+          </tr>
+          <tr>
+            <td class="label">Previous version:</td>
+            <td class="value">(none)</td>
+          </tr>
+          <tr>
+            <td class="label">Status:</td>
+            <td class="value"><span class="status-stable">STABLE</span></td>
+          </tr>
+          <tr>
+            <td class="label">Publication date:</td>
+            <td class="value">13 May 2026</td>
+          </tr>
+          <tr>
+            <td class="label">Editor:</td>
+            <td class="value">Wesley Snow (RANKIGI)</td>
+          </tr>
+          <tr>
+            <td class="label">Repository:</td>
+            <td class="value"><a href="https://github.com/hace-standard/spec" target="_blank" rel="noopener noreferrer">github.com/hace-standard/spec</a></td>
+          </tr>
+          <tr>
+            <td class="label">License:</td>
+            <td class="value">MIT</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </section>
-
-  <section class="section" style="border-top: none;">
-    <span class="section-label">01 -- WHAT HACE IS</span>
-    <h2 class="section-heading">What HACE Is</h2>
-    <hr class="section-divider">
-    <p class="section-body">A governance system computes a sealed daily summary of everything it observed. A compliance framework has a human review that summary, sign over the exact bytes they were shown, and declare what they were shown, on whose authority they signed, and what their signature means. Any compliance framework can connect to any governance system without bespoke integration. The governance system does not own the signature. The compliance framework does not own the evidence. Each is independently verifiable.</p>
+    <hr class="rule">
   </section>
 
   <section class="section">
-    <span class="section-label">02 -- THE STACK</span>
-    <h2 class="section-heading">The Stack</h2>
-    <hr class="section-divider">
-    <table class="stack-table">
-      <tr>
-        <td class="col-name">RANKIGI / KYA</td>
-        <td class="col-desc">execution substrate, identity layer, boundary readiness gate</td>
-      </tr>
-      <tr class="highlight">
-        <td class="col-name">HACE</td>
-        <td class="col-desc">human acknowledgment of chain execution, mutual binding loop</td>
-      </tr>
-      <tr>
-        <td class="col-name">EVIDE</td>
-        <td class="col-desc">responsibility closure layer, evidentiary profile computation</td>
-      </tr>
-      <tr>
-        <td class="col-name">FEDIS</td>
-        <td class="col-desc">evidentiary admissibility layer, legal output packaging</td>
-      </tr>
+    <h2>Abstract</h2>
+    <p>HACE defines an interoperable protocol by which a compliance framework acknowledges a sealed daily summary produced by a governance system. A governance system computes the summary. A human, acting through a compliance framework, signs over the exact bytes they were shown and declares what they were shown, on whose authority they signed, and what their signature means. Any compliance framework can connect to any governance system without bespoke integration.</p>
+  </section>
+
+  <section class="section">
+    <h2>Status of This Document</h2>
+    <p>This is the v1.0 stable release of HACE, published 13 May 2026. It is intended as a normative reference for implementers. Errata and revisions are tracked at <a href="https://github.com/hace-standard/spec/issues" target="_blank" rel="noopener noreferrer">github.com/hace-standard/spec/issues</a>. Substantive changes will result in a new version with a distinct URI. This document is licensed under MIT.</p>
+    <hr class="rule section-rule">
+  </section>
+
+  <section class="block-section">
+    <h2>Table of Contents</h2>
+    <ol class="toc">
+      <li><a href="https://github.com/hace-standard/spec/blob/main/SPEC.md#overview" target="_blank" rel="noopener noreferrer">Overview</a></li>
+      <li><a href="https://github.com/hace-standard/spec/blob/main/SPEC.md#definitions" target="_blank" rel="noopener noreferrer">Definitions</a></li>
+      <li><a href="https://github.com/hace-standard/spec/blob/main/SPEC.md#candidate-format" target="_blank" rel="noopener noreferrer">Candidate Format</a></li>
+      <li><a href="https://github.com/hace-standard/spec/blob/main/SPEC.md#attestation-format" target="_blank" rel="noopener noreferrer">Attestation Format</a></li>
+      <li><a href="https://github.com/hace-standard/spec/blob/main/SPEC.md#signing-rules" target="_blank" rel="noopener noreferrer">Signing Rules</a></li>
+      <li><a href="https://github.com/hace-standard/spec/blob/main/SPEC.md#verification-rules" target="_blank" rel="noopener noreferrer">Verification Rules</a></li>
+      <li><a href="https://github.com/hace-standard/spec/blob/main/SPEC.md#anti-replay" target="_blank" rel="noopener noreferrer">Anti-Replay</a></li>
+      <li><a href="https://github.com/hace-standard/spec/blob/main/SPEC.md#schema-version-evolution" target="_blank" rel="noopener noreferrer">Schema Version Evolution</a></li>
+    </ol>
+    <hr class="rule section-rule">
+  </section>
+
+  <section class="block-section">
+    <h2>1. The Stack</h2>
+    <table class="data-table">
+      <tbody>
+        <tr>
+          <td class="col-name">RANKIGI / KYA</td>
+          <td class="col-desc">execution substrate, identity layer, boundary readiness gate</td>
+        </tr>
+        <tr>
+          <td class="col-name">HACE</td>
+          <td class="col-desc">human acknowledgment of chain execution, mutual binding loop</td>
+        </tr>
+        <tr>
+          <td class="col-name">EVIDE</td>
+          <td class="col-desc">responsibility closure layer, evidentiary profile computation</td>
+        </tr>
+        <tr>
+          <td class="col-name">FEDIS</td>
+          <td class="col-desc">evidentiary admissibility layer, legal output packaging</td>
+        </tr>
+      </tbody>
     </table>
+    <hr class="rule section-rule">
   </section>
 
-  <section class="section">
-    <span class="section-label">03 -- CONFORMANCE PROFILES</span>
-    <h2 class="section-heading">Conformance Profiles</h2>
-    <hr class="section-divider">
-    <div class="conformance-grid">
-      <div class="conformance-card featured">
-        <span class="profile-name amber">BASELINE</span>
-        <span class="profile-uri">rankigi.com/hace/profiles/baseline-v1</span>
-        <span class="chip enforced">ENFORCED</span>
-        <p class="profile-desc">All required HACE v1.0 fields. No additional requirements.</p>
-      </div>
-      <div class="conformance-card">
-        <span class="profile-name">HIGH-ASSURANCE</span>
-        <span class="profile-uri">rankigi.com/hace/profiles/high-assurance-v1</span>
-        <span class="chip defined">DEFINED</span>
-        <p class="profile-desc">Requires transparency log inclusion proof. AAL2 minimum.</p>
-      </div>
-      <div class="conformance-card">
-        <span class="profile-name">INSTITUTIONAL</span>
-        <span class="profile-uri">rankigi.com/hace/profiles/institutional-v1</span>
-        <span class="chip defined">DEFINED</span>
-        <p class="profile-desc">Requires delegation chain and acting_on_behalf_of authority declaration.</p>
-      </div>
-      <div class="conformance-card">
-        <span class="profile-name">REGULATED</span>
-        <span class="profile-uri">rankigi.com/hace/profiles/regulated-v1</span>
-        <span class="chip defined">DEFINED</span>
-        <p class="profile-desc">SOX, HIPAA, EU-AI-ACT, PART-11. IAL2 and AAL2 minimum. APPROVAL or RESPONSIBILITY signature meaning only.</p>
-      </div>
-    </div>
+  <section class="block-section">
+    <h2>2. Conformance Profiles</h2>
+    <p class="intro">A conforming HACE implementation must satisfy the requirements of one of the following profiles.</p>
+    <dl class="profiles">
+      <dt>BASELINE <span class="status-enforced">ENFORCED</span></dt>
+      <dd>
+        All required HACE v1.0 fields. No additional requirements.
+        <span class="uri"><a href="https://hace-standard.org/profiles/baseline-v1" target="_blank" rel="noopener noreferrer">hace-standard.org/profiles/baseline-v1</a></span>
+      </dd>
+      <dt>HIGH-ASSURANCE <span class="status-defined">DEFINED</span></dt>
+      <dd>
+        Requires transparency log inclusion proof. AAL2 minimum.
+        <span class="uri"><a href="https://hace-standard.org/profiles/high-assurance-v1" target="_blank" rel="noopener noreferrer">hace-standard.org/profiles/high-assurance-v1</a></span>
+      </dd>
+      <dt>INSTITUTIONAL <span class="status-defined">DEFINED</span></dt>
+      <dd>
+        Requires delegation chain and acting_on_behalf_of authority declaration.
+        <span class="uri"><a href="https://hace-standard.org/profiles/institutional-v1" target="_blank" rel="noopener noreferrer">hace-standard.org/profiles/institutional-v1</a></span>
+      </dd>
+      <dt>REGULATED <span class="status-defined">DEFINED</span></dt>
+      <dd>
+        SOX, HIPAA, EU-AI-ACT, PART-11. IAL2 and AAL2 minimum. APPROVAL or RESPONSIBILITY signature meaning only.
+        <span class="uri"><a href="https://hace-standard.org/profiles/regulated-v1" target="_blank" rel="noopener noreferrer">hace-standard.org/profiles/regulated-v1</a></span>
+      </dd>
+    </dl>
+    <hr class="rule section-rule">
   </section>
 
-  <section class="section">
-    <span class="section-label">04 -- SIGNING ALGORITHMS</span>
-    <h2 class="section-heading">Supported Algorithms</h2>
-    <hr class="section-divider">
-    <table class="stack-table">
-      <tr>
-        <td class="col-name">Ed25519</td>
-        <td class="col-desc">Recommended. First implementation target.</td>
-      </tr>
-      <tr>
-        <td class="col-name">ML-DSA-65</td>
-        <td class="col-desc">NIST FIPS 204. Post-quantum.</td>
-      </tr>
-      <tr>
-        <td class="col-name">RSASSA-PSS-SHA256</td>
-        <td class="col-desc">RSA-PSS. DocuSign compatible.</td>
-      </tr>
-      <tr>
-        <td class="col-name">ECDSA-P256</td>
-        <td class="col-desc">NIST curve. Widely supported.</td>
-      </tr>
-      <tr>
-        <td class="col-name">ECDSA-P384</td>
-        <td class="col-desc">NIST curve. Higher security margin.</td>
-      </tr>
+  <section class="block-section">
+    <h2>3. Cryptographic Algorithms</h2>
+    <table class="data-table algos">
+      <tbody>
+        <tr>
+          <td class="col-name">Ed25519</td>
+          <td class="col-desc">Recommended. First implementation target.</td>
+        </tr>
+        <tr>
+          <td class="col-name">ML-DSA-65</td>
+          <td class="col-desc">NIST FIPS 204. Post-quantum.</td>
+        </tr>
+        <tr>
+          <td class="col-name">RSASSA-PSS-SHA256</td>
+          <td class="col-desc">RSA-PSS. DocuSign compatible.</td>
+        </tr>
+        <tr>
+          <td class="col-name">ECDSA-P256</td>
+          <td class="col-desc">NIST curve. Widely supported.</td>
+        </tr>
+        <tr>
+          <td class="col-name">ECDSA-P384</td>
+          <td class="col-desc">NIST curve. Higher security margin.</td>
+        </tr>
+      </tbody>
     </table>
+    <hr class="rule section-rule">
   </section>
 
-  <section class="section">
-    <span class="section-label">05 -- COMPANION STANDARDS</span>
-    <h2 class="section-heading">Companion Standards</h2>
-    <hr class="section-divider">
-    <div class="companion-row">
-      <div class="companion-card">
-        <span class="companion-tag">KYA</span>
-        <div class="companion-title">Know Your Agent</div>
-        <p class="companion-desc">The open standard for AI agent identity. KYA answers: what is this agent and what is it allowed to do? HACE answers: did a named human acknowledge what it did?</p>
-        <a class="companion-link" href="https://github.com/kya-standard/spec" target="_blank" rel="noopener noreferrer">github.com/kya-standard/spec</a>
-      </div>
-      <div class="companion-card">
-        <span class="companion-tag">EVIDE</span>
-        <div class="companion-title">Evidentiary Framework</div>
-        <p class="companion-desc">First HACE conforming provider. Computes the evidentiary profile independently from the signed acknowledgment. Co-authored interface mapping published at certifywebcontent.com.</p>
-        <a class="companion-link" href="https://app.certifywebcontent.com/docs/rankigi-evide-interface/" target="_blank" rel="noopener noreferrer">app.certifywebcontent.com/docs/rankigi-evide-interface/</a>
-      </div>
+  <section class="block-section">
+    <h2>4. Normative References</h2>
+    <ol class="refs">
+      <li>KYA -- Know Your Agent. Open standard for AI agent identity. <a href="https://github.com/kya-standard/spec" target="_blank" rel="noopener noreferrer">github.com/kya-standard/spec</a></li>
+      <li>EVIDE -- Evidentiary Framework. First conforming HACE provider. Co-authored interface mapping: <a href="https://app.certifywebcontent.com/docs/rankigi-evide-interface/" target="_blank" rel="noopener noreferrer">app.certifywebcontent.com/docs/rankigi-evide-interface/</a></li>
+    </ol>
+    <hr class="rule section-rule">
+  </section>
+
+  <section class="block-section">
+    <h2>5. Errata and Revisions</h2>
+    <div class="errata-lines">
+      <p>Errata are tracked at <a href="https://github.com/hace-standard/spec/issues" target="_blank" rel="noopener noreferrer">github.com/hace-standard/spec/issues</a>.</p>
+      <p>The changelog is maintained at <a href="https://github.com/hace-standard/spec/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">github.com/hace-standard/spec/blob/main/CHANGELOG.md</a>.</p>
     </div>
+    <hr class="rule section-rule">
   </section>
 
-</div>
+  <section class="block-section">
+    <h2>6. Acknowledgments</h2>
+    <p style="font-size:16px;color:#0d0d0c;line-height:1.75;max-width:720px;">HACE v1.0 was authored by Wesley Snow (RANKIGI). The EVIDE evidentiary framework, developed by Emanuel Celano, served as the first conforming implementation target and contributed to the design of the Layer A / Layer B separation. The interface mapping between HACE and EVIDE v2.0 is co-authored and published at certifywebcontent.com.</p>
+  </section>
 
-<footer class="site-footer">
-  <div class="footer-left">
-    <span class="footer-brand">HACE</span>
-    <span class="footer-tagline">Human Acknowledgment of Chain Execution</span>
+</main>
+
+<footer class="colophon">
+  <div class="container">
+    <p>HACE v1.0 -- Published 13 May 2026 -- MIT License -- hace-standard.org</p>
   </div>
-  <div class="footer-center">Version 1.0 -- May 2026 -- MIT License</div>
-  <div class="footer-right">Observable is not provable.</div>
 </footer>
 
 </body>
