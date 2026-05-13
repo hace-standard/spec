@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - run: npm install -g ajv-cli ajv-formats
-      - run: ajv compile -s schema/hace-v1.0.json
-      - run: ajv compile -s schema/candidate-v1.0.json
+      - run: ajv compile -s schema/hace-v1.0.json --spec=draft7 -c ajv-formats
+      - run: ajv compile -s schema/candidate-v1.0.json --spec=draft7 -c ajv-formats
 
   validate-python:
     runs-on: ubuntu-latest
@@ -34,9 +34,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - run: npm install -g typescript
       - run: >
           tsc --strict --noEmit --target ES2022
-          --moduleResolution node verify/verify.ts
+          --moduleResolution bundler
+          --ignoreDeprecations 6.0
+          verify/verify.ts
       - run: echo "TypeScript verifier compiles clean"
