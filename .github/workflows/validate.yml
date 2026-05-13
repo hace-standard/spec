@@ -35,10 +35,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install -g typescript @types/node
-      - run: >
-          tsc --strict --noEmit --target ES2022
-          --moduleResolution bundler
-          --ignoreDeprecations 6.0
-          verify/verify.ts
+      - run: npm install typescript @types/node
+      - run: npx tsc
       - run: echo "TypeScript verifier compiles clean"
